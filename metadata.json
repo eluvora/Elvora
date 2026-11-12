@@ -1,0 +1,8 @@
+{
+  "name": "ELVORA",
+  "description": "Modern Frameworks for a Modern World — Zero-budget smart learning companion with rule-based intelligence, Learning Diagnosis, FlipCards, Smart MCQs, Smart Summary, Quick Answers, and Premium study previews.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

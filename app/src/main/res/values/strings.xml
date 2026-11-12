@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ELVORA</string>
+    <string name="brand_tagline">Modern Frameworks for a Modern World.</string>
+    <string name="brand_mission">Make learning smarter, simpler, more effective and accessible to everyone.</string>
+    <string name="demo_mode_badge">Local Device Mode (₹0 Zero-Budget)</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_library">Library</string>
+    <string name="nav_progress">Progress</string>
+    <string name="nav_feedback">Feedback</string>
+</resources>
