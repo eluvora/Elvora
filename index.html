@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#091344">
+  <title>ELVORA — Your Learning Space</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="app">
+
+    <!-- AUTHENTICATION -->
+    <section id="auth-screen" class="screen">
+      <div class="auth-card">
+        <img src="https://raw.githubusercontent.com/eluvora/Elvora/main/app/src/main/res/drawable/img_elvora_launcher_fg.jpg" alt="ELVORA logo">
+        <h1>Welcome to ELVORA</h1>
+        <p>Your personal learning space.</p>
+        <div class="auth-tabs">
+          <button onclick="showAuth('login')">Sign In</button>
+          <button onclick="showAuth('register')">Register</button>
+        </div>
+        <form id="auth-form">
+          <input id="auth-name" placeholder="Full name" autocomplete="name">
+          <input id="auth-email" type="email" placeholder="Email address" required>
+          <input id="auth-password" type="password" placeholder="Password" required>
+          <button type="submit">Continue</button>
+        </form>
+        <button onclick="demoLogin()">Continue as Demo Student</button>
+        <button onclick="forgotPassword()">Forgot Password?</button>
+        <p id="auth-message"></p>
+        <small>Local demo account. No cloud account is connected.</small>
+      </div>
+    </section>
+
+    <!-- WELCOME -->
+    <section id="welcome-screen" class="screen hidden">
+      <img
+        class="welcome-hero"
+        src="https://raw.githubusercontent.com/eluvora/Elvora/main/app/src/main/res/drawable/img_welcome_hero.jpg"
+        alt="Welcome to ELVORA">
+      <div class="welcome-content">
+        <p>LEARN • CREATE • GROW</p>
+        <h1 id="welcome-title">A better way to learn</h1>
+        <p id="welcome-description">Make your study journey more meaningful.</p>
+        <div id="welcome-dots"></div>
+        <button onclick="previousWelcome()">Previous</button>
+        <button onclick="toggleWelcome()">Pause</button>
+        <button onclick="nextWelcome()">Next</button>
+        <button onclick="finishWelcome()">Start Learning</button>
+        <button onclick="skipWelcome()">Skip</button>
+      </div>
+    </section>
+
+    <!-- MAIN APP -->
+    <section id="main-app" class="hidden">
+
+      <header class="topbar">
+        <button onclick="toggleSidebar()" aria-label="Open menu">☰</button>
+        <div class="brand">ELVORA</div>
+        <button onclick="toggleMusic()" id="music-button">♫</button>
+      </header>
+
+      <aside id="sidebar">
+        <div class="sidebar-brand">ELVORA</div>
+        <button onclick="navigate('dashboard')">⌂ Dashboard</button>
+        <button onclick="navigate('library')">▤ Library</button>
+        <button onclick="navigate('progress')">▥ Progress</button>
+        <button onclick="navigate('feedback')">☆ Feedback</button>
+        <hr>
+        <button onclick="navigate('mcqs')">Smart MCQs</button>
+        <button onclick="navigate('flipcards')">FlipCards</button>
+        <button onclick="navigate('summary')">Smart Summary</button>
+        <button onclick="navigate('answers')">Quick Answers</button>
+        <hr>
+        <button onclick="navigate('smartnotes')">🔒 SmartNotes</button>
+        <button onclick="navigate('quizforge')">🔒 QuizForge</button>
+        <button onclick="navigate('revision')">🔒 LastMinute Revision</button>
+        <button onclick="navigate('studycast')">🔒 StudyCast</button>
+        <button onclick="navigate('plans')">Subscription Plans</button>
+        <hr>
+        <button onclick="navigate('profile')">Profile</button>
+        <button onclick="navigate('settings')">Settings</button>
+        <button onclick="navigate('help')">Help & Support</button>
+        <button onclick="logout()">Sign Out</button>
+      </aside>
+
+      <main id="main-content">
+
+        <!-- DASHBOARD -->
+        <section id="page-dashboard" class="page">
+          <div class="hero-card">
+            <p>YOUR LEARNING JOURNEY</p>
+            <h1>Welcome back, <span id="student-name">Learner</span></h1>
+            <p>Learn smarter. Grow further. Every day.</p>
+            <button onclick="replayWelcome()">Explore ELVORA</button>
+          </div>
+
+          <h2>Your Learning Overview</h2>
+          <div class="stats-grid">
+            <article class="stat-card">
+              <span>👩‍🎓</span>
+              <h3 id="learner-count">—</h3>
+              <p>Learners</p>
+            </article>
+            <article class="stat-card">
+              <span>📚</span>
+              <h3 id="activity-count">0</h3>
+              <p>Activities</p>
+            </article>
+            <article class="stat-card">
+              <span>📝</span>
+              <h3 id="quiz-count">0</h3>
+              <p>Quizzes</p>
+            </article>
+            <article class="stat-card">
+              <span>⭐</span>
+              <h3 id="cards-count">0</h3>
+              <p>Cards Learnt</p>
+            </article>
+          </div>
+
+          <h2>Free Learning Tools</h2>
+          <div class="tools-grid">
+            <button onclick="navigate('mcqs')">Smart MCQs</button>
+            <button onclick="navigate('flipcards')">FlipCards</button>
+            <button onclick="navigate('summary')">Smart Summary</button>
+            <button onclick="navigate('answers')">Quick Answers</button>
+          </div>
+
+          <h2>Explore Premium</h2>
+          <div class="premium-grid">
+            <button onclick="navigate('smartnotes')">🔒 SmartNotes</button>
+            <button onclick="navigate('quizforge')">🔒 QuizForge</button>
+            <button onclick="navigate('revision')">🔒 LastMinute Revision</button>
+            <button onclick="navigate('studycast')">🔒 StudyCast</button>
+          </div>
+
+          <h2>Recent Activities</h2>
+          <div id="recent-activities">No activities yet.</div>
+        </section>
+
+        <!-- FREE TOOLS -->
+        <section id="page-mcqs" class="page hidden">
+          <h1>Smart MCQs</h1>
+          <p>Generate practice questions from your study material.</p>
+          <textarea id="mcq-source" placeholder="Paste your study notes..."></textarea>
+          <label>Difficulty</label>
+          <select id="mcq-difficulty">
+            <option>Easy</option><option>Medium</option><option>Hard</option>
+          </select>
+          <label>Number of questions</label>
+          <select id="mcq-count">
+            <option>2</option><option>5</option><option>10</option>
+          </select>
+          <button onclick="generateMCQs()">Generate MCQs</button>
+          <div id="mcq-results"></div>
+          <button onclick="submitMCQs()">Submit Answers</button>
+          <div id="mcq-diagnosis"></div>
+        </section>
+
+        <section id="page-flipcards" class="page hidden">
+          <h1>FlipCards</h1>
+          <textarea id="cards-source" placeholder="Paste study material..."></textarea>
+          <select id="cards-count">
+            <option>2</option><option>5</option><option>10</option>
+          </select>
+          <button onclick="generateCards()">Generate Cards</button>
+          <div id="cards-results"></div>
+        </section>
+
+        <section id="page-summary" class="page hidden">
+          <h1>Smart Summary</h1>
+          <textarea id="summary-source" placeholder="Paste your notes..."></textarea>
+          <button onclick="generateSummary()">Generate Summary</button>
+          <div id="summary-results"></div>
+          <button onclick="saveSummary()">Save to Library</button>
+        </section>
+
+        <section id="page-answers" class="page hidden">
+          <h1>Quick Answers</h1>
+          <input id="answer-question" placeholder="Ask your question">
+          <textarea id="answer-source" placeholder="Paste study material..."></textarea>
+          <button onclick="generateAnswer()">Find Answer</button>
+          <div id="answer-results"></div>
+        </section>
+
+        <!-- PREMIUM LOCKED SCREENS -->
+        <section id="page-smartnotes" class="page hidden">
+          <div class="locked-card">
+            <h1>🔒 SmartNotes</h1>
+            <p>Premium feature — currently locked.</p>
+            <div id="smartnotes-preview"></div>
+            <button onclick="navigate('plans')">View Plans</button>
+          </div>
+        </section>
+
+        <section id="page-quizforge" class="page hidden">
+          <div class="locked-card">
+            <h1>🔒 QuizForge</h1>
+            <p>Premium feature — currently locked.</p>
+            <div id="quizforge-preview"></div>
+            <button onclick="navigate('plans')">View Plans</button>
+          </div>
+        </section>
+
+        <section id="page-revision" class="page hidden">
+          <div class="locked-card">
+            <h1>🔒 LastMinute Revision</h1>
+            <p>Premium feature — currently locked.</p>
+            <div id="revision-preview"></div>
+            <button onclick="navigate('plans')">View Plans</button>
+          </div>
+        </section>
+
+        <section id="page-studycast" class="page hidden">
+          <div class="locked-card">
+            <h1>🔒 StudyCast</h1>
+            <p>Premium feature — currently locked.</p>
+            <div id="studycast-preview"></div>
+            <button onclick="navigate('plans')">View Plans</button>
+          </div>
+        </section>
+
+        <!-- LIBRARY -->
+        <section id="page-library" class="page hidden">
+          <h1>My Library</h1>
+          <input id="library-search" placeholder="Search saved material...">
+          <select id="library-filter">
+            <option value="ALL">All</option>
+            <option value="MCQS">MCQs</option>
+            <option value="FLIPCARDS">FlipCards</option>
+            <option value="SMART_SUMMARY">Smart Summary</option>
+            <option value="QUICK_ANSWERS">Quick Answers</option>
+            <option value="SMART_NOTES">SmartNotes</option>
+            <option value="CUSTOM_QUIZZES">Custom Quizzes</option>
+            <option value="REVISION_SHEETS">Revision Sheets</option>
+            <option value="STUDYCAST">StudyCast</option>
+          </select>
+          <div id="library-items"></div>
+        </section>
+
+        <!-- PROGRESS -->
+        <section id="page-progress" class="page hidden">
+          <h1>My Progress</h1>
+          <div id="progress-metrics"></div>
+          <h2>Weekly Activity</h2>
+          <div id="weekly-chart"></div>
+          <h2>Topic Performance</h2>
+          <div id="topic-performance"></div>
+          <h2>Areas to Improve</h2>
+          <div id="weak-topics"></div>
+          <h2>Recent Quiz Attempts</h2>
+          <div id="quiz-history"></div>
+        </section>
+
+        <!-- FEEDBACK -->
+        <section id="page-feedback" class="page hidden">
+          <h1>Feedback</h1>
+          <select id="feedback-category">
+            <option>General</option><option>Smart MCQs</option>
+            <option>FlipCards</option><option>Smart Summary</option>
+            <option>Quick Answers</option><option>Welcome Animation</option>
+            <option>Premium Previews</option>
+          </select>
+          <label>Rating</label>
+          <select id="feedback-rating">
+            <option value="5">★★★★★</option>
+            <option value="4">★★★★</option>
+            <option value="3">★★★</option>
+            <option value="2">★★</option>
+            <option value="1">★</option>
+          </select>
+          <textarea id="feedback-liked" placeholder="What did you like?"></textarea>
+          <textarea id="feedback-improve" placeholder="What can we improve?"></textarea>
+          <button onclick="submitFeedback()">Submit Feedback</button>
+          <div id="feedback-history"></div>
+        </section>
+
+        <!-- PLANS -->
+        <section id="page-plans" class="page hidden">
+          <h1>Subscription Plans</h1>
+          <p>Premium remains locked until verified activation.</p>
+          <div id="subscription-plans">
+            <article>7 Days — ₹49</article>
+            <article>14 Days — ₹79</article>
+            <article>1 Month — ₹149</article>
+            <article>3 Months — ₹399</article>
+            <article>6 Months — ₹599</article>
+            <article>12 Months — ₹999</article>
+          </div>
+          <p>Payment is disabled in this demo. No purchase or unlock is simulated.</p>
+        </section>
+
+        <!-- PROFILE -->
+        <section id="page-profile" class="page hidden">
+          <h1>My Profile</h1>
+          <img class="student-avatar"
+            src="https://raw.githubusercontent.com/eluvora/Elvora/main/app/src/main/res/drawable/img_student_avatar.jpg"
+            alt="Student avatar">
+          <input id="profile-name" placeholder="Display name">
+          <button onclick="saveProfile()">Save Profile</button>
+          <p>Free Tier · ₹0</p>
+          <p id="profile-activity"></p>
+        </section>
+
+        <!-- SETTINGS -->
+        <section id="page-settings" class="page hidden">
+          <h1>Settings</h1>
+          <label>Theme</label>
+          <select id="theme-setting" onchange="changeTheme(this.value)">
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+            <option value="system">System</option>
+          </select>
+          <label><input type="checkbox" id="music-setting"> Background Music</label>
+          <label>Music Volume</label>
+          <input type="range" id="music-volume" min="0" max="100">
+          <label><input type="checkbox" id="motion-setting"> Reduced Motion</label>
+          <label><input type="checkbox" id="reminder-setting"> Study Reminders</label>
+          <button onclick="clearStudyData()">Clear Study Data</button>
+          <button onclick="logout()">Sign Out</button>
+        </section>
+
+        <!-- HELP -->
+        <section id="page-help" class="page hidden">
+          <h1>Help & Support</h1>
+          <p>Need help using ELVORA?</p>
+          <p>For support, visit our official contact channels.</p>
+          <a href="https://www.instagram.com/elvora.axiom/" target="_blank" rel="noopener">Instagram Support</a>
+        </section>
+
+      </main>
+
+      <nav id="bottom-nav">
+        <button onclick="navigate('dashboard')">Home</button>
+        <button onclick="navigate('library')">Library</button>
+        <button onclick="navigate('progress')">Progress</button>
+        <button onclick="navigate('feedback')">Feedback</button>
+      </nav>
+    </section>
+  </div>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
